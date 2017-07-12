@@ -9,6 +9,8 @@ class BreathingCube : public Entity
 
 public:
     bool spinningCube = false;
+    bool isPaused = false;
+    bool spinningLocal = false;
 
     BreathingCube(Shader * shader, glm::vec3 initial_pos, glm::vec4 initial_color) {
         m_type = ET_CUBE;
@@ -109,8 +111,14 @@ public:
             //glm::mat4 translatedCubeModel = glm::translate(glm::mat4(), glm::vec3(m_pos));
 
             glm::mat4 translatedCubeModel;
-            if(spinningCube) translatedCubeModel = glm::rotate(translatedCubeModel, (float)(.5*glfwGetTime()), glm::vec3(0.0, 1.0 , 0.0));
+
+            if (!isPaused) {
+                if(spinningCube) translatedCubeModel = glm::rotate(translatedCubeModel, (float)(.5*glfwGetTime()), glm::vec3(0.0, 1.0 , 0.0));
+            }
             translatedCubeModel = glm::translate(translatedCubeModel, glm::vec3(m_pos.x , m_pos.y, m_pos.z));
+            if (!isPaused) {
+                if(spinningLocal) translatedCubeModel = glm::rotate(translatedCubeModel, (float)(.5*glfwGetTime()), glm::vec3(0.0, 1.0 , 0.0));
+            }
             translatedCubeModel = glm::scale(translatedCubeModel, glm::vec3(m_current_breath_amt));
 
             //scaledCubeModel = glm::rotate(translatedCubeModel, (float)glfwGetTime(), glm::vec3(0.0, 1.0 /m_pos.x, 0.0));
