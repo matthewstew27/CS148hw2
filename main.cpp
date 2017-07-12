@@ -98,10 +98,15 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
     if (key == GLFW_KEY_P && action == GLFW_PRESS) {
         pIsPressed = !pIsPressed;
+        g_world->paused = pIsPressed;
     }
     if (key == GLFW_KEY_8 && action == GLFW_PRESS) {
         g_world->spinning = true;
     } if (key == GLFW_KEY_0 && action == GLFW_PRESS) {
+        g_world->spinning = false;
+        g_world->spinninglocal = false;
+    } if (key == GLFW_KEY_9 && action == GLFW_PRESS) {
+        g_world->spinninglocal = true;
         g_world->spinning = false;
     }
 

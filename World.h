@@ -35,6 +35,8 @@ public:
         m_camera = new Camera(glm::vec3(0.0f, 0.0f, 14.0f));
     }
     bool spinning = false;
+    bool spinninglocal = false;
+    bool paused = false;
     ~World() {
         for(size_t i = 0; i < m_entities.size(); i++) {
             Entity * curr = m_entities.at(i);
@@ -79,6 +81,8 @@ public:
         // Draw ALL the things!
         for(size_t i = 0; i < m_entities.size(); i++) {
             Entity * curr = m_entities.at(i);
+
+            ((BreathingCube *)curr)->isPaused = paused;
             if(curr) curr->render();
         }
 
@@ -98,6 +102,7 @@ public:
         for(size_t i = 0; i < m_entities.size(); i++) {
             Entity * curr = m_entities.at(i);
             ((BreathingCube *)curr)->spinningCube = spinning;
+            ((BreathingCube *)curr)->spinningLocal = spinninglocal;
             if(!curr) continue;
 
             handleCollisions(curr);
