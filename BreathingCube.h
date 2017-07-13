@@ -11,6 +11,8 @@ public:
     bool spinningCube = false;
     bool isPaused = false;
     bool spinningLocal = false;
+    static GLuint staticVBO;
+    static GLuint staticContainerVAO;
 
     BreathingCube(Shader * shader, glm::vec3 initial_pos, glm::vec4 initial_color) {
         m_type = ET_CUBE;
@@ -29,6 +31,7 @@ public:
         // Set up data for OpenGL: vertex data, buffers, and attribute pointers
         // Note that part 5 of your assignment will have you alter way that the
         // remainder of this method is set up such that we avoid repeat work.
+        if (staticVBO == 0) {
         GLfloat vertices[] = {
             -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
              0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -74,13 +77,13 @@ public:
         };
 
         // First, set the container's VAO (and VBO)
-        glGenVertexArrays(1, &containerVAO);
-        glGenBuffers(1, &VBO);
+        glGenVertexArrays(1, &staticContainerVAO);
+        glGenBuffers(1, &staticVBO);
 
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBindBuffer(GL_ARRAY_BUFFER, staticVBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-        glBindVertexArray(containerVAO);
+        glBindVertexArray(staticContainerVAO);
 
         // Position attribute
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
@@ -91,10 +94,11 @@ public:
         glEnableVertexAttribArray(1);
         glBindVertexArray(0);
     }
+    }
 
     ~BreathingCube() {
-        glDeleteBuffers(1, &VBO);
-        glDeleteVertexArrays(1, &containerVAO);
+        //glDeleteBuffers(1, &staticVBO);
+        //glDeleteVertexArrays(1, &staticContainerVAO);
     }
 
     void render() const {
@@ -127,7 +131,7 @@ public:
         }
 
         // Draw the cube from its VAO
-        glBindVertexArray(containerVAO);
+        glBindVertexArray(staticContainerVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
     }
@@ -153,3 +157,6 @@ protected:
     GLuint VBO;
     GLuint containerVAO;
 };
+
+GLuint BreathingCube::staticVBO = 0;
+GLuint BreathingCube::staticContainerVAO = 0;

@@ -31,6 +31,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void handleInput();
 void setupWorld2D(GLFWwindow* window);
 void setupWorld3D(GLFWwindow* window);
+void setupWorld28(GLFWwindow* window);
 
 const glm::vec3 kLightPos = glm::vec3(0.0f, 0.0f, 9.0f);
 
@@ -44,6 +45,7 @@ bool threeDimensions = false;
 bool pIsPressed = false;
 bool rotatingAnimation = false;
 bool blue = false;
+bool twentyeight = false;
 
 
 // Deltatime
@@ -101,30 +103,41 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         pIsPressed = !pIsPressed;
         g_world->paused = pIsPressed;
     }
-    if (key == GLFW_KEY_8 && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_8 && (action == GLFW_PRESS) && !pIsPressed) {
         g_world->spinning = true;
-    } if (key == GLFW_KEY_0 && action == GLFW_PRESS) {
+    } if (key == GLFW_KEY_0 && (action == GLFW_PRESS) && !pIsPressed) {
         g_world->spinning = false;
         g_world->spinninglocal = false;
-    } if (key == GLFW_KEY_9 && action == GLFW_PRESS) {
+    } if (key == GLFW_KEY_9 && (action == GLFW_PRESS) && !pIsPressed) {
         g_world->spinninglocal = true;
         g_world->spinning = false;
     } if (key == GLFW_KEY_B && action == GLFW_PRESS) {
         g_world->blueIsPressed = !g_world->blueIsPressed;
     } if (key == GLFW_KEY_L && action == GLFW_PRESS) {
         g_world->lightMovement = !g_world->lightMovement;
+    } if (key == GLFW_KEY_H && (action == GLFW_PRESS) && !pIsPressed) {
+        if (!twentyeight) {
+            twentyeight = true;
+            delete(g_world);
+            setupWorld28(window);
+        } else {
+            if (threeDimensions) setupWorld3D(window);
+            if (!threeDimensions) setupWorld2D(window);
+            twentyeight = false;
+        }
+
     }
 
 
     if (key >= 0 && key < 1024) {
-        if (keys[GLFW_KEY_2]) {
+        if (keys[GLFW_KEY_2] && !twentyeight) {
             if (threeDimensions == true) {   //if 3D now
                 threeDimensions = false;
                 delete(g_world);
                 setupWorld2D(window);
             }
         }
-        if (keys[GLFW_KEY_3]) {
+        if (keys[GLFW_KEY_3] && !twentyeight) {
             if (threeDimensions == false) {
                 threeDimensions = true;
                 delete(g_world);
@@ -220,7 +233,18 @@ void setupWorld3D(GLFWwindow * window) {
             }
         }
     }
-
+}
+void setupWorld28(GLFWwindow * window) {
+    g_world = new World(window);
+    g_world->addEntity(new Light(g_world->m_shader, kLightPos));
+    for (float x = -14.0; x <= 14.0001; x += 1.0) {
+        for (float y = -14.0; y <= 14.0001; y += 1.0) {
+            for (float z = -28.0; z <= 0.0001; z += 1.0) {
+                BreathingCube * c = new BreathingCube(g_world->m_shader, glm::vec3(x,y,z), glm::vec4(0.7f, 0.17f, 0.17f, 1.0f));
+                g_world->addEntity(c);
+            }
+        }
+    }
 }
 
 // Main entry point
