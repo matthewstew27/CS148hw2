@@ -43,6 +43,7 @@ bool    keys[1024];
 bool threeDimensions = false;
 bool pIsPressed = false;
 bool rotatingAnimation = false;
+bool blue = false;
 
 
 // Deltatime
@@ -108,6 +109,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     } if (key == GLFW_KEY_9 && action == GLFW_PRESS) {
         g_world->spinninglocal = true;
         g_world->spinning = false;
+    } if (key == GLFW_KEY_B && action == GLFW_PRESS) {
+        g_world->blueIsPressed = !g_world->blueIsPressed;
+    } if (key == GLFW_KEY_L && action == GLFW_PRESS) {
+        g_world->lightMovement = !g_world->lightMovement;
     }
 
 
@@ -193,7 +198,6 @@ void cleanup() {
 void setupWorld2D(GLFWwindow * window) {
     g_world = new World(window);
     g_world->addEntity(new Light(g_world->m_shader, kLightPos));
-
     //create a 13x13 grid of cubes
     for (float x = -6.0; x <= 6.0001; x += 1.0) {
         for (float y = -6.0; y <= 6.0001; y += 1.0) {

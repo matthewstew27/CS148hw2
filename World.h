@@ -37,6 +37,8 @@ public:
     bool spinning = false;
     bool spinninglocal = false;
     bool paused = false;
+    bool blueIsPressed = false;
+    bool lightMovement = false;
     ~World() {
         for(size_t i = 0; i < m_entities.size(); i++) {
             Entity * curr = m_entities.at(i);
@@ -58,8 +60,8 @@ public:
 
         // Setup the shader based upon camera
         GLint viewPosLoc = glGetUniformLocation(m_shader->Program, "viewPos");
-        glUniform3f(viewPosLoc, m_camera->Position.x, m_camera->Position.y, m_camera->Position.z);
 
+        glUniform3f(viewPosLoc, m_camera->Position.x, m_camera->Position.y, m_camera->Position.z);
         int w, h;
         glfwGetFramebufferSize(m_window, &w, &h);
 
@@ -103,6 +105,14 @@ public:
             Entity * curr = m_entities.at(i);
             ((BreathingCube *)curr)->spinningCube = spinning;
             ((BreathingCube *)curr)->spinningLocal = spinninglocal;
+            if(curr->m_type == ET_LIGHT && lightMovement) {
+                ((Light*)curr)->m_pos.x = 7*sin(3*glfwGetTime());
+                ((Light*)curr)->m_pos.y = 7*cos(3*glfwGetTime());
+            }
+            if(curr->m_type == ET_LIGHT) {
+                if (blueIsPressed) {((Light*) curr )->m_color = glm::vec4(0, 0, 1, 1);}
+                if (!blueIsPressed) {((Light*) curr )->m_color = glm::vec4(1, 1, 1, 1);}
+            }
             if(!curr) continue;
 
             handleCollisions(curr);

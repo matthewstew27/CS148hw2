@@ -18,11 +18,11 @@ public:
     }
 
     ~Light() {
-        
+
     }
 
     void render() const {
-        if (m_shader) { 
+        if (m_shader) {
             m_shader->Use();
 
             GLint lightColorLoc = glGetUniformLocation(m_shader->Program, "lightColor");

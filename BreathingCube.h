@@ -120,8 +120,6 @@ public:
                 if(spinningLocal) translatedCubeModel = glm::rotate(translatedCubeModel, (float)(.5*glfwGetTime()), glm::vec3(0.0, 1.0 , 0.0));
             }
             translatedCubeModel = glm::scale(translatedCubeModel, glm::vec3(m_current_breath_amt));
-
-            //scaledCubeModel = glm::rotate(translatedCubeModel, (float)glfwGetTime(), glm::vec3(0.0, 1.0 /m_pos.x, 0.0));
             GLint modelLoc = glGetUniformLocation(m_shader->Program, "model"); // Get the locations of uniforms for the shader
 
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(translatedCubeModel)); // Pass the transformed model matrix to the shader
@@ -142,7 +140,7 @@ public:
         m_color[0] = .8 * m_current_breath_amt;
         m_color[1] = m_initial_color[1];
         m_color[2] = 1- m_color[0];
-        //m_pos.z = m_initial_pos.z + (m_current_breath_amt * 1.28);
+        m_pos.z = m_initial_pos.z + (m_current_breath_amt * 1.28);
         m_total_time += time_since_last_update;
     }
 

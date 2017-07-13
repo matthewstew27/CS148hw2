@@ -10,11 +10,11 @@ Short Answer Questions:
 
 Understanding Shaders:
 
-a. <YOUR ANSWER HERE>
+a. In line 14 the order of operations was flipped and model was multiplied by view instead of vice versa.
 
-b. <YOUR ANSWER HERE>
+b. Here the light ambient strength was increased. On line 17, instead of setting it equal to .1 it was set to be some higher value (somewhere around .7).
 
-c. <YOUR ANSWER HERE>
+c. Line 30, the power to which the max(dot(viewDir, reflectDir), 0.0) is being raised is increased significantly resulting in a much higher value of the float spec. In addition it appears that specular strength is multiplied by some constant to increase its value as well.
 
 Open-ended portion:
 
