@@ -2,12 +2,14 @@
 
 #include <GLFW/glfw3.h>
 
+
 // GLM Mathematics
 #define GLM_FORCE_RADIANS // force everything in radian
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/random.hpp>
+#include <unistd.h>
 
 #include "Camera.h"
 
@@ -39,6 +41,9 @@ public:
     bool paused = false;
     bool blueIsPressed = false;
     bool lightMovement = false;
+    bool scene = false;
+
+
     ~World() {
         for(size_t i = 0; i < m_entities.size(); i++) {
             Entity * curr = m_entities.at(i);
@@ -109,9 +114,12 @@ public:
                 ((Light*)curr)->m_pos.x = 7*sin(3*glfwGetTime());
                 ((Light*)curr)->m_pos.y = 7*cos(3*glfwGetTime());
             }
-            if(curr->m_type == ET_LIGHT) {
+            if(curr->m_type == ET_LIGHT && (scene == false)) {
                 if (blueIsPressed) {((Light*) curr )->m_color = glm::vec4(0, 0, 1, 1);}
                 if (!blueIsPressed) {((Light*) curr )->m_color = glm::vec4(1, 1, 1, 1);}
+            } else if (curr->m_type == ET_LIGHT && (scene == true)) {
+                ((Light*) curr)->m_color = glm::vec4(0.49, .54, .91, .1);   //make bluish light
+                ((Light*) curr)->m_pos = glm::vec3(0.0f, -100.0f, 9.0f);       //make light under world
             }
             if(!curr) continue;
 

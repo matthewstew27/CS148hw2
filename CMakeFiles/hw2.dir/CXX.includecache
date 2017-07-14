@@ -28,6 +28,8 @@ glm/gtc/type_ptr.hpp
 glm/gtc/random.hpp
 -
 
+/Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/FloorCube.h
+
 /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Light.h
 
 /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/STLib.h
@@ -39,6 +41,10 @@ Light.h
 /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Light.h
 World.h
 /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/World.h
+FloorCube.h
+/Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/FloorCube.h
+Stars.h
+/Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Stars.h
 
 /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Shader.h
 string
@@ -52,6 +58,8 @@ iostream
 GL/glew.h
 -
 
+/Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Stars.h
+
 /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/World.h
 vector
 -
@@ -64,6 +72,8 @@ glm/gtc/matrix_transform.hpp
 glm/gtc/type_ptr.hpp
 -
 glm/gtc/random.hpp
+-
+unistd.h
 -
 Camera.h
 /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Camera.h

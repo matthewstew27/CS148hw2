@@ -5,9 +5,11 @@ hws/hw2/CMakeFiles/hw2.dir/main.cpp.o
  /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/BreathingCube.h
  /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Camera.h
  /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Entity.h
+ /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/FloorCube.h
  /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Light.h
  /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/STLib.h
  /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Shader.h
+ /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/Stars.h
  /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/World.h
  /Users/matthewstewart/Documents/Junior Summer/cs148-student-repo/hws/hw2/main.cpp
  lib/glew/include/GL/glew.h

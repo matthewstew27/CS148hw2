@@ -4,9 +4,11 @@
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/BreathingCube.h
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/Camera.h
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/Entity.h
+hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/FloorCube.h
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/Light.h
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/STLib.h
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/Shader.h
+hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/Stars.h
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/World.h
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: hws/hw2/main.cpp
 hws/hw2/CMakeFiles/hw2.dir/main.cpp.o: lib/glew/include/GL/glew.h

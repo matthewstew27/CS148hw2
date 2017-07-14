@@ -32,6 +32,7 @@ void handleInput();
 void setupWorld2D(GLFWwindow* window);
 void setupWorld3D(GLFWwindow* window);
 void setupWorld28(GLFWwindow* window);
+void setupScene(GLFWwindow* window);
 
 const glm::vec3 kLightPos = glm::vec3(0.0f, 0.0f, 9.0f);
 
@@ -46,11 +47,13 @@ bool pIsPressed = false;
 bool rotatingAnimation = false;
 bool blue = false;
 bool twentyeight = false;
+bool falling = false;
 
 
 // Deltatime
 GLfloat deltaTime = 0.0f;   // Time between current frame and last frame
 GLfloat timeOfLastFrame = 0.0f;   // Time of last frame
+
 
 class World; // forward declaration
 World * g_world;
@@ -126,6 +129,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             twentyeight = false;
         }
 
+    } if (key == GLFW_KEY_Z && (action == GLFW_PRESS)) {
+        delete(g_world);
+        setupScene(window);
     }
 
 
@@ -245,6 +251,24 @@ void setupWorld28(GLFWwindow * window) {
             }
         }
     }
+}
+
+void setupScene(GLFWwindow* window) {
+    g_world = new World(window);
+    g_world->scene = true;
+    g_world->addEntity(new Light(g_world->m_shader, kLightPos));
+    FloorCube *f = new FloorCube(g_world->m_shader, glm::vec3(0,-10,0), glm::vec4(.69f, 1.73f, .67f, 1.0f));
+    srand(time(NULL));
+    for (int x = 0; x < 100; x ++) {
+        for (int z = 0; z < 100; z ++ ) {
+            int xcord = rand() %200 - 100;
+            int zcord = rand() %200 - 100;
+            int ycord = rand() %50;
+            Star *s = new Star(g_world->m_shader, glm::vec3(xcord,10 + ycord,zcord), glm::vec4(1.0f, 1.0f, 1.0f, 10.0f));
+            g_world->addEntity(s);
+        }
+    }
+    g_world->addEntity(f);
 }
 
 // Main entry point

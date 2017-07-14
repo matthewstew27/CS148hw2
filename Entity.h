@@ -21,6 +21,7 @@ typedef enum et {
     ET_NONE = 0,
     ET_CUBE,
     ET_LIGHT,
+    ET_STAR,
 } EntityType;
 
 class Entity {
@@ -29,26 +30,26 @@ public:
 
     Entity() {}
     virtual ~Entity() {}
-    
-    // remember: setting a C++ function equal to 0 means it's 
-    // "pure abstract". 
-    // Because Entity contains at least one pure abstract method, 
-    // the entire class therefore becomes abstract. 
-    // i.e. You cannot create an instance of  "Entity" - you 
-    // must create a sub-class to instantiate it because it 
+
+    // remember: setting a C++ function equal to 0 means it's
+    // "pure abstract".
+    // Because Entity contains at least one pure abstract method,
+    // the entire class therefore becomes abstract.
+    // i.e. You cannot create an instance of  "Entity" - you
+    // must create a sub-class to instantiate it because it
     // contains at least one pure abstract method.
     virtual void render() const = 0;
     virtual void update(double time_since_last_update) = 0;
-    
+
     // member vars
     bool m_active;
     float m_total_time; // time elapsed since creation
 
     glm::vec3 m_pos;
     glm::vec4 m_color;
-    
+
     EntityType m_type;
 
     Shader * m_shader;
-    
+
 };
